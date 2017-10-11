@@ -80,5 +80,17 @@ namespace JARVIS4
             }
             return JARVIS_type_properties;
         }
+        public static bool run_JARVIS_function(string type_name, string function_name, string function_parameters)
+        {
+            try
+            {
+                
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
     }
 }

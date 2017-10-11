@@ -9,11 +9,18 @@ namespace JARVIS4
     /// <summary>
     /// This class will handle all learning functions for JARVIS
     /// </summary>
-    public class JARVISLearning
+    public static class JARVISLearning
     {
-        public JARVISLearning()
+        public static bool log_command()
         {
-
+            try
+            {
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
     }
 }
