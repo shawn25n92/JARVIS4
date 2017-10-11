@@ -1,0 +1,6 @@
+D:\ConsoleApps\JARVIS4\JARVIS4\bin\Debug\JARVIS4.exe.config
+D:\ConsoleApps\JARVIS4\JARVIS4\bin\Debug\JARVIS4.exe
+D:\ConsoleApps\JARVIS4\JARVIS4\bin\Debug\JARVIS4.pdb
+D:\ConsoleApps\JARVIS4\JARVIS4\obj\Debug\JARVIS4.csprojResolveAssemblyReference.cache
+D:\ConsoleApps\JARVIS4\JARVIS4\obj\Debug\JARVIS4.exe
+D:\ConsoleApps\JARVIS4\JARVIS4\obj\Debug\JARVIS4.pdb
