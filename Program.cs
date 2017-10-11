@@ -13,7 +13,6 @@ namespace JARVIS4
         /// Handle all JARVIS logic
         /// </summary>
         /// <param name="args"></param>
-        public static JARVISDiagnostics program_diagnostics = new JARVISDiagnostics();
         static void Main(string[] args)
         {
             bool program_running = true;
@@ -44,7 +43,7 @@ namespace JARVIS4
                                     {
                                         Console.WriteLine("Invalid process path/name");
                                     }
-                                    program_diagnostics.StartProcess(path);
+                                    JARVISDiagnostics.StartProcess(path);
                                 }
                                 else
                                 {
@@ -70,6 +69,11 @@ namespace JARVIS4
                                     Console.WriteLine("Unable to perform operation \"start\". Incorrect secondary command");
                                 }
                             }
+                        }
+                        else if (primary_command == "diag")
+                        {
+                            JARVISConsole.list_to_console(JARVISDiagnostics.list_JARVIS_types());
+                            JARVISConsole.list_to_console(JARVISDiagnostics.list_JARVIS_type_properties("JARVIS4.JARVISLearning"));
                         }
                         else
                         {

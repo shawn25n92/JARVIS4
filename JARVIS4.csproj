@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="JARVISConsole.cs" />
     <Compile Include="JARVISDiagnostics.cs" />
     <Compile Include="JARVISLearning.cs" />
     <Compile Include="JARVISPatternRecognition.cs" />

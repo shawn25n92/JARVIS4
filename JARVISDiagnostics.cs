@@ -5,16 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 using System.Diagnostics;
+using System.Reflection;
+using System.Reflection.Emit;
 
 namespace JARVIS4
 {
-    public class JARVISDiagnostics
+    public static class JARVISDiagnostics
     {
-        public JARVISDiagnostics()
-        {
-
-        }
-        public bool StartProcess(string process_path)
+        public static bool StartProcess(string process_path)
         {
             try
             {
@@ -25,6 +23,57 @@ namespace JARVIS4
             {
                 return false;
             }
+        }
+        public static List<string> list_JARVIS_types()
+        {
+            List<string> JARVIS_types = new List<string>();
+            try
+            {
+                Assembly JARVIS_assembly = Assembly.GetExecutingAssembly();
+                Type[] JARVIS_type_array = JARVIS_assembly.GetTypes();
+                foreach(Type JARVIS_type in JARVIS_type_array)
+                {
+                    JARVIS_types.Add(JARVIS_type.FullName);
+                }
+            }
+            catch(Exception ex)
+            {
+                JARVIS_types.Add(ex.ToString());
+            }
+            return JARVIS_types;
+        }
+        public static List<string> list_JARVIS_type_properties(string JARVIS_type_full_name)
+        {
+            List<string> JARVIS_type_properties = new List<string>();
+            try
+            {
+                Type JARVIS_type = Type.GetType(JARVIS_type_full_name);
+                if(JARVIS_type != null)
+                {
+                    FieldInfo[] JARVIS_type_field_array = JARVIS_type.GetFields();
+                    PropertyInfo[] JARVIS_type_property_array = JARVIS_type.GetProperties();
+                    MethodInfo[] JARVIS_type_method_array = JARVIS_type.GetMethods();
+                    JARVIS_type_properties.Add(String.Format("Field Information for {0}", JARVIS_type_full_name));
+                    foreach(FieldInfo JARVIS_type_field in JARVIS_type_field_array)
+                    {
+                        JARVIS_type_properties.Add(String.Format("{0} {1}", JARVIS_type_field.Name, JARVIS_type_field.FieldType));
+                    }
+                    JARVIS_type_properties.Add(String.Format("Property Information for {0}", JARVIS_type_full_name));
+                    foreach(PropertyInfo JARVIS_type_property in JARVIS_type_property_array)
+                    {
+                        JARVIS_type_properties.Add(String.Format("{0} {1}", JARVIS_type_property.Name, JARVIS_type_property.PropertyType));
+                    }
+                }
+                else
+                {
+                    JARVIS_type_properties.Add(String.Format("Unable to find JARVIS type {0}", JARVIS_type_full_name));
+                }
+            }
+            catch(Exception ex)
+            {
+
+            }
+            return JARVIS_type_properties;
         }
     }
 }
