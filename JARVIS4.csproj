@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="JARVISConsole.cs" />
+    <Compile Include="JARVISCustomAlgorithms.cs" />
     <Compile Include="JARVISDiagnostics.cs" />
     <Compile Include="JARVISLearning.cs" />
     <Compile Include="JARVISPatternRecognition.cs" />
