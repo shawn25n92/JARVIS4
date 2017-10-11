@@ -63,6 +63,11 @@ namespace JARVIS4
                     {
                         JARVIS_type_properties.Add(String.Format("{0} {1}", JARVIS_type_property.Name, JARVIS_type_property.PropertyType));
                     }
+                    JARVIS_type_properties.Add(String.Format("Method Information for {0}", JARVIS_type_full_name));
+                    foreach(MethodInfo JARVIS_type_method in JARVIS_type_method_array)
+                    {
+                        JARVIS_type_properties.Add(String.Format("{0} returns {1}", JARVIS_type_method.Name, JARVIS_type_method.ReturnType));
+                    }
                 }
                 else
                 {

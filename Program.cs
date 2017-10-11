@@ -75,6 +75,14 @@ namespace JARVIS4
                             JARVISConsole.list_to_console(JARVISDiagnostics.list_JARVIS_types());
                             JARVISConsole.list_to_console(JARVISDiagnostics.list_JARVIS_type_properties("JARVIS4.JARVISLearning"));
                         }
+                        else if (primary_command == "read")
+                        {
+                            JARVISCustomAlgorithms.MerimenRequestStatistics(@"C:\Users\shawn\Documents\MERIMEN CUSTOMIZATIONS\#22381\22381_GENERAL_SECTION.txt");
+                        }
+                        else if (primary_command == "customalgo")
+                        {
+                            JARVISConsole.list_to_console(JARVISDiagnostics.list_JARVIS_type_properties("JARVIS4.JARVISCustomAlgorithms"));
+                        }
                         else
                         {
                             Console.WriteLine("Unable to perform operation \"start\". Insufficient information provided");
