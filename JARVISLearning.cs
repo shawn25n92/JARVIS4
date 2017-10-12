@@ -16,17 +16,16 @@ namespace JARVIS4
             try
             {
                 Directory.CreateDirectory(String.Format("{0}\\{1}", executable_root, folder_name));
-                StreamWriter log_file = new StreamWriter(String.Format("{0}\\{1}\\{2}", executable_root, folder_name, log_file_name));
+                StreamWriter log_file = new StreamWriter(String.Format("{0}\\{1}\\{2}", executable_root, folder_name, log_file_name), append: true);
                 log_file.WriteLine("{0}\t{1}", DateTime.Now, log_message);
                 log_file.Close();
-                throw new Exception("");
                 return true;
             }
             catch (Exception ex)
             {
                 Directory.CreateDirectory(String.Format("{0}\\{1}", executable_root, folder_name));
-                StreamWriter log_file = new StreamWriter(String.Format("{0}\\{1}\\{2}", executable_root, folder_name, log_file_name));
-                log_file.WriteLine("{0}\t{1}", DateTime.Now, ex.ToString());
+                StreamWriter log_file = new StreamWriter(String.Format("{0}\\{1}\\{2}", executable_root, folder_name, log_file_name), append: true);
+                log_file.WriteLine("{0}\t{1}", DateTime.Now, ex.Message);
                 log_file.Close();
                 return false;
             }

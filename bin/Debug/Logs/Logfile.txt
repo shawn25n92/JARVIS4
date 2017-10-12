@@ -1,2 +1,22 @@
 10/12/2017 9:48:29 AM	System.Exception
    at JARVIS4.JARVISLearning.log_command(String executable_root, String folder_name, String log_file_name, String log_message) in C:\ConsoleApps\JARVIS4\JARVISLearning.cs:line 22
+10/12/2017 9:54:42 AM	diag
+10/12/2017 9:54:42 AM	System.Exception
+   at JARVIS4.JARVISLearning.log_command(String executable_root, String folder_name, String log_file_name, String log_message) in C:\ConsoleApps\JARVIS4\JARVISLearning.cs:line 22
+10/12/2017 9:54:44 AM	diag
+10/12/2017 9:54:44 AM	System.Exception
+   at JARVIS4.JARVISLearning.log_command(String executable_root, String folder_name, String log_file_name, String log_message) in C:\ConsoleApps\JARVIS4\JARVISLearning.cs:line 22
+10/12/2017 9:54:51 AM	start process chrome
+10/12/2017 9:54:51 AM	System.Exception
+   at JARVIS4.JARVISLearning.log_command(String executable_root, String folder_name, String log_file_name, String log_message) in C:\ConsoleApps\JARVIS4\JARVISLearning.cs:line 22
+10/12/2017 9:56:04 AM	exit
+10/12/2017 9:56:04 AM	System.Exception
+   at JARVIS4.JARVISLearning.log_command(String executable_root, String folder_name, String log_file_name, String log_message) in C:\ConsoleApps\JARVIS4\JARVISLearning.cs:line 22
+10/12/2017 9:56:06 AM	diag
+10/12/2017 9:56:06 AM	
+10/12/2017 9:56:08 AM	diag
+10/12/2017 9:56:08 AM	
+10/12/2017 9:56:09 AM	diag
+10/12/2017 9:56:09 AM	
+10/12/2017 9:56:44 AM	exit
+10/12/2017 9:56:44 AM	
