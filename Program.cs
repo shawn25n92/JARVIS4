@@ -21,6 +21,8 @@ namespace JARVIS4
             user_input = Console.ReadLine();
             while (program_running)
             {
+                JARVISLearning.log_command(JARVISDiagnostics.get_JARVIS_executable_path(), "Logs", "Logfile.txt", user_input);
+                
                 List<string> command_parameters = user_input.Split(' ').ToList();
                 string primary_command = command_parameters[0].Trim().ToLower();
                 try
@@ -74,6 +76,7 @@ namespace JARVIS4
                         {
                             JARVISConsole.list_to_console(JARVISDiagnostics.list_JARVIS_types());
                             JARVISConsole.list_to_console(JARVISDiagnostics.list_JARVIS_type_properties("JARVIS4.JARVISLearning"));
+                            Console.WriteLine("Path = {0}", JARVISDiagnostics.get_JARVIS_executable_path());
                         }
                         else if (primary_command == "read")
                         {

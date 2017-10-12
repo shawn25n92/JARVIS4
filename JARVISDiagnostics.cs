@@ -92,5 +92,19 @@ namespace JARVIS4
                 return false;
             }
         }
+        public static string get_JARVIS_executable_path()
+        {
+            string JARVIS_executable_path = "";
+            try
+            {
+                Assembly JARVIS_assembly = Assembly.GetExecutingAssembly();
+                JARVIS_executable_path = System.IO.Path.GetDirectoryName(JARVIS_assembly.Location);
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            return JARVIS_executable_path;
+        }
     }
 }

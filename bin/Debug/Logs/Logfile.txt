@@ -1,0 +1,2 @@
+10/12/2017 9:48:29 AM	System.Exception
+   at JARVIS4.JARVISLearning.log_command(String executable_root, String folder_name, String log_file_name, String log_message) in C:\ConsoleApps\JARVIS4\JARVISLearning.cs:line 22
