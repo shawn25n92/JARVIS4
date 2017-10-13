@@ -80,7 +80,7 @@ namespace JARVIS4
                         }
                         else if (primary_command == "read")
                         {
-                            JARVISCustomAlgorithms.MerimenRequestStatistics(@"C:\Users\shawn\Documents\MERIMEN CUSTOMIZATIONS\#22381\22381_GENERAL_SECTION.txt");
+                            JARVISCustomAlgorithms.MerimenRequestStatistics_SplitFile(@"C:\Users\shawn\Documents\MERIMEN CUSTOMIZATIONS\#22773\shawn.txt", JARVISDiagnostics.get_JARVIS_executable_path(), "MerimenRequestAudits");
                         }
                         else if (primary_command == "customalgo")
                         {

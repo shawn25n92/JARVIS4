@@ -9,38 +9,67 @@ namespace JARVIS4
 {
     public static class JARVISCustomAlgorithms
     {
-        public static List<string> MerimenRequestStatistics(string file_path)
+        /// <summary>
+        /// This function will split the Merimen Log File based on day
+        /// </summary>
+        /// <param name="file_path"></param>
+        /// <param name="log_directory"></param>
+        /// <returns></returns>
+        public static List<string> MerimenRequestStatistics_SplitFile(string file_path, string root_directory, string log_directory)
         {
             List<string> diagnostics = new List<string>();
             List<string> request_string_list = new List<string>();
+            // Need to create a proper directory
             try
             {
-                StreamReader source_file = new StreamReader(file_path);
                 
-                string file_data = source_file.ReadToEnd();
-                request_string_list = file_data.Split('\n').ToList();
-                while ((file_data = source_file.ReadLine()) != null)
+                Directory.CreateDirectory(String.Format(@"{0}\{1}", root_directory, log_directory));
+                FileStream target_file = File.Open(file_path, FileMode.Open, FileAccess.Read, FileShare.Read);
+                BufferedStream target_file_buffered = new BufferedStream(target_file);
+                StreamReader target_file_buffered_streamed = new StreamReader(target_file_buffered);
+                string line;
+                while ((line = target_file_buffered_streamed.ReadLine()) != null)
                 {
-                    Console.WriteLine(file_data);
-                }
-                /*foreach (string request_string in request_string_list)
-                {
-                    // check if the query string contains fusebox and fuseaction
-                    List<string> query_parameters = request_string.Split('&').ToList();
-                    if (request_string.Contains("fusebox") && request_string.Contains("fuseaction"))
+                    
+                    string[] columns = line.Split('\t').Select(x => x.Trim()).ToArray();
+                    string datepart = columns[1].Split(' ')[0];
+                    
+                    DateTime record_date = new DateTime();
+                    if(DateTime.TryParse(datepart,out record_date))
                     {
-                        // Do something with it
+                        StreamWriter new_file = new StreamWriter(String.Format(@"{0}\{1}\{2}.txt", root_directory, log_directory, datepart), append: true);
+                        new_file.WriteLine(line);
+                        new_file.Close();
+                        Console.WriteLine(line);
                     }
-                }*/
-                source_file.Close();
+                    else
+                    {
+                        Console.WriteLine("Cannot convert to a date");
+                    }
+                    
+                }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
                 diagnostics = new List<string>();
                 diagnostics.Add(ex.ToString());
             }
             return diagnostics;
+        }
+        public static List<string> MerimenRequestStatistics_Analyze()
+        {
+            List<string> returned_list = new List<string>();
+            try
+            {
+                DateTime start_date = Convert.ToDateTime("2017-08-01");
+                DateTime end_date = Convert.ToDateTime("2017-08-31");
+            }
+            catch(Exception ex)
+            {
+                returned_list.Add(ex.ToString());
+            }
+            return returned_list;
         }
         /// <summary>
         /// This function will be used to analyse the stupidity that is sspTRXInsClmAssignGet
