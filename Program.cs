@@ -86,6 +86,19 @@ namespace JARVIS4
                         {
                             JARVISConsole.list_to_console(JARVISDiagnostics.list_JARVIS_type_properties("JARVIS4.JARVISCustomAlgorithms"));
                         }
+                        else if (primary_command == "textprocessing")
+                        {
+                            if (command_parameters.ElementAtOrDefault(1) != null)
+                            {
+                                string file_path = user_input.Replace("textprocessing","").Trim();
+                                JARVISTextProcessing.read_large_text_file(file_path);
+                                
+                            }
+                            else
+                            {
+                                Console.WriteLine("Unable to perform operation \"textprocessing\". File name not provided");
+                            }
+                        }
                         else
                         {
                             Console.WriteLine("Unable to perform operation \"start\". Insufficient information provided");
