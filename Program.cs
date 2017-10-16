@@ -80,7 +80,8 @@ namespace JARVIS4
                         }
                         else if (primary_command == "read")
                         {
-                            JARVISCustomAlgorithms.MerimenRequestStatistics_SplitFile(@"C:\Users\shawn\Documents\MERIMEN CUSTOMIZATIONS\#22773\shawn.txt", JARVISDiagnostics.get_JARVIS_executable_path(), "MerimenRequestAudits");
+                            //JARVISCustomAlgorithms.MerimenRequestStatistics_SplitFile(@"C:\Users\shawn\Documents\MERIMEN CUSTOMIZATIONS\#22773\shawn.txt", JARVISDiagnostics.get_JARVIS_executable_path(), "MerimenRequestAudits");
+                            JARVISCustomAlgorithms.MerimenRequestStatistics_Analyze(@"C:\Users\shawn\Documents\MERIMEN CUSTOMIZATIONS\#22773\Split Files");
                         }
                         else if (primary_command == "customalgo")
                         {
@@ -91,7 +92,6 @@ namespace JARVIS4
                             if (command_parameters.ElementAtOrDefault(1) != null)
                             {
                                 string file_path = user_input.Replace("textprocessing","").Trim();
-                                //JARVISTextProcessing.read_large_text_file(file_path);
                                 JARVISTextProcessing.read_large_text_file(file_path, JARVISTextProcessing.test_writeline, JARVISTextProcessing.test_writeline);
                                 
                             }

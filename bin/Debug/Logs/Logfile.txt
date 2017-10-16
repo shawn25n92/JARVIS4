@@ -63,3 +63,27 @@
 10/16/2017 9:50:00 AM	jarvis c:\jarvis\name.txt
 10/16/2017 9:50:13 AM	textprocessing c:\jarvis\name.txt
 10/16/2017 9:53:18 AM	textprocessing c:\jarvis\name.txt
+10/16/2017 4:24:04 PM	customalgo
+10/16/2017 4:42:18 PM	read
+10/16/2017 4:42:54 PM	read
+10/16/2017 4:43:11 PM	read
+10/16/2017 4:46:24 PM	read
+10/16/2017 4:46:41 PM	read
+10/16/2017 4:47:14 PM	read
+10/16/2017 4:47:27 PM	read
+10/16/2017 4:48:14 PM	read
+10/16/2017 4:51:35 PM	read
+10/16/2017 4:53:05 PM	read
+10/16/2017 4:58:45 PM	read
+10/16/2017 5:32:07 PM	read
+10/16/2017 5:32:47 PM	read
+10/16/2017 5:34:09 PM	read
+10/16/2017 5:38:17 PM	read
+10/16/2017 5:38:28 PM	read
+10/16/2017 5:38:49 PM	read
+10/16/2017 5:40:12 PM	read
+10/16/2017 5:40:35 PM	read
+10/16/2017 5:41:26 PM	read
+10/16/2017 5:45:54 PM	read
+10/16/2017 5:47:11 PM	read
+10/16/2017 6:05:09 PM	exit
