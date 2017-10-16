@@ -91,7 +91,8 @@ namespace JARVIS4
                             if (command_parameters.ElementAtOrDefault(1) != null)
                             {
                                 string file_path = user_input.Replace("textprocessing","").Trim();
-                                JARVISTextProcessing.read_large_text_file(file_path);
+                                //JARVISTextProcessing.read_large_text_file(file_path);
+                                JARVISTextProcessing.read_large_text_file(file_path, JARVISTextProcessing.test_writeline, JARVISTextProcessing.test_writeline);
                                 
                             }
                             else

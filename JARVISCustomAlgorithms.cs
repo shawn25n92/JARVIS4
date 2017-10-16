@@ -15,7 +15,7 @@ namespace JARVIS4
         /// <param name="file_path"></param>
         /// <param name="log_directory"></param>
         /// <returns></returns>
-        public static delegate bool merimen_splitfile(string record);
+        public delegate bool merimen_splitfile(string record);
         public static bool MerimenRequest_splitfile(string record)
         {
             Console.WriteLine(record + "hello");
