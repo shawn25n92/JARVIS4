@@ -19,10 +19,10 @@ namespace JARVIS4
             string user_input = "";
             Console.Write("Enter a command: ");
             user_input = Console.ReadLine();
+
             while (program_running)
             {
                 JARVISLearning.log_command(JARVISDiagnostics.get_JARVIS_executable_path(), "Logs", "Logfile.txt", user_input);
-                
                 List<string> command_parameters = user_input.Split(' ').ToList();
                 string primary_command = command_parameters[0].Trim().ToLower();
                 try
@@ -57,7 +57,7 @@ namespace JARVIS4
 
                             }
                         }
-                        if (primary_command == "new")
+                        else if (primary_command == "new")
                         {
                             if (command_parameters.ElementAtOrDefault(1) != null)
                             {
@@ -72,7 +72,7 @@ namespace JARVIS4
                                 }
                             }
                         }
-                        else if (primary_command == "diag")
+                        else if (primary_command == "diagnostics")
                         {
                             JARVISConsole.list_to_console(JARVISDiagnostics.list_JARVIS_types());
                             JARVISConsole.list_to_console(JARVISDiagnostics.list_JARVIS_type_properties("JARVIS4.JARVISLearning"));
@@ -85,15 +85,16 @@ namespace JARVIS4
                         }
                         else if (primary_command == "customalgo")
                         {
+                            Console.WriteLine("JARVIS Custom Algorithms");
                             JARVISConsole.list_to_console(JARVISDiagnostics.list_JARVIS_type_properties("JARVIS4.JARVISCustomAlgorithms"));
                         }
                         else if (primary_command == "textprocessing")
                         {
+                            // Need to find a way to deliver commands properly
                             if (command_parameters.ElementAtOrDefault(1) != null)
                             {
                                 string file_path = user_input.Replace("textprocessing","").Trim();
                                 JARVISTextProcessing.read_large_text_file(file_path, JARVISTextProcessing.test_writeline, JARVISTextProcessing.test_writeline);
-                                
                             }
                             else
                             {

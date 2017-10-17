@@ -42,6 +42,20 @@ namespace JARVIS4
             }
             return JARVIS_types;
         }
+        public List<MethodInfo> list_JARVIS_type_methods(string type_name)
+        {
+            List<MethodInfo> type_method_list = new List<MethodInfo>();
+            try
+            {
+                Type JARVIS_type = 
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                type_method_list = null;
+            }
+            return type_method_list;
+        }
         public static List<string> list_JARVIS_type_properties(string JARVIS_type_full_name)
         {
             List<string> JARVIS_type_properties = new List<string>();
