@@ -147,5 +147,10 @@ namespace JARVIS4
                 return false;
             }
         }
+        public static bool randomalgo(string hello)
+        {
+            Console.WriteLine("This is a test invoked function");
+            return true;
+        }
     }
 }

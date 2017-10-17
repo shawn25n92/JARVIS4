@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
-
 namespace JARVIS4
 {
-    public static class JARVISTextProcessing
+    /// <summary>
+    /// This class is purely for reading of massive text files
+    /// </summary>
+    public static class JARVISFileProcessing
     {
-        
         public static bool read_large_text_file(string file_path)
         {
             try
@@ -30,7 +31,7 @@ namespace JARVIS4
                 return false;
             }
         }
-        public static bool read_large_text_file(string file_path, params Func<string,bool>[] function_array)
+        public static bool read_large_text_file(string file_path, params Func<string, bool>[] function_array)
         {
             try
             {
@@ -41,7 +42,7 @@ namespace JARVIS4
                 while ((line = target_file_buffered_stream.ReadLine()) != null)
                 {
                     // Do some logic here
-                    foreach(Func<string,bool> function in function_array)
+                    foreach (Func<string, bool> function in function_array)
                     {
                         function(line);
                     }
@@ -52,11 +53,6 @@ namespace JARVIS4
             {
                 return false;
             }
-        }
-        public static bool test_writeline(string output)
-        {
-            Console.WriteLine("hello {0}", output);
-            return true;
         }
     }
 }

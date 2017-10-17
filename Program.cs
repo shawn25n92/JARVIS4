@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using System.IO;
+using System.Reflection;
 
 namespace JARVIS4
 {
@@ -15,6 +17,9 @@ namespace JARVIS4
         /// <param name="args"></param>
         static void Main(string[] args)
         {
+            Dictionary<string, Type> JARVIS_types = new Dictionary<string, Type>();
+            Dictionary<string, MethodInfo> JARVIS_methods = new Dictionary<string, MethodInfo>();
+
             bool program_running = true;
             string user_input = "";
             Console.Write("Enter a command: ");
@@ -80,7 +85,6 @@ namespace JARVIS4
                         }
                         else if (primary_command == "read")
                         {
-                            //JARVISCustomAlgorithms.MerimenRequestStatistics_SplitFile(@"C:\Users\shawn\Documents\MERIMEN CUSTOMIZATIONS\#22773\shawn.txt", JARVISDiagnostics.get_JARVIS_executable_path(), "MerimenRequestAudits");
                             JARVISCustomAlgorithms.MerimenRequestStatistics_Analyze(@"C:\Users\shawn\Documents\MERIMEN CUSTOMIZATIONS\#22773\Split Files");
                         }
                         else if (primary_command == "customalgo")
@@ -88,17 +92,30 @@ namespace JARVIS4
                             Console.WriteLine("JARVIS Custom Algorithms");
                             JARVISConsole.list_to_console(JARVISDiagnostics.list_JARVIS_type_properties("JARVIS4.JARVISCustomAlgorithms"));
                         }
-                        else if (primary_command == "textprocessing")
+                        else if (primary_command == "fileprocessing")
                         {
-                            // Need to find a way to deliver commands properly
                             if (command_parameters.ElementAtOrDefault(1) != null)
                             {
-                                string file_path = user_input.Replace("textprocessing","").Trim();
-                                JARVISTextProcessing.read_large_text_file(file_path, JARVISTextProcessing.test_writeline, JARVISTextProcessing.test_writeline);
+                                string file_path = user_input.Replace("fileprocessing","").Trim();
+                                JARVISFileProcessing.read_large_text_file(file_path);
                             }
                             else
                             {
                                 Console.WriteLine("Unable to perform operation \"textprocessing\". File name not provided");
+                            }
+                        }
+                        else if (primary_command == "run")
+                        {
+                            if(command_parameters.ElementAtOrDefault(1) != null)
+                            {
+                                string type_name = command_parameters[1];
+                                string function_name = command_parameters.ElementAtOrDefault(2);
+                                string function_parameters = command_parameters.ElementAtOrDefault(3);
+                                JARVISDiagnostics.run_JARVIS_function(type_name, function_name, function_parameters);
+                            }
+                            else
+                            {
+                                Console.WriteLine("Unable to peform operation \"run\". Type name not provided");
                             }
                         }
                         else

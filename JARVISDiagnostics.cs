@@ -42,12 +42,12 @@ namespace JARVIS4
             }
             return JARVIS_types;
         }
-        public List<MethodInfo> list_JARVIS_type_methods(string type_name)
+        public static List<MethodInfo> list_JARVIS_type_methods(string type_name)
         {
             List<MethodInfo> type_method_list = new List<MethodInfo>();
             try
             {
-                Type JARVIS_type = 
+                
             }
             catch (Exception ex)
             {
@@ -98,11 +98,34 @@ namespace JARVIS4
         {
             try
             {
-                
+                Type JARVIS_type = Type.GetType(String.Format("JARVIS4.{0}", type_name));
+                if (JARVIS_type != null)
+                {
+                    MethodInfo JARVIS_type_method = JARVIS_type.GetMethod(function_name);
+                    if(JARVIS_type_method != null)
+                    {
+                        foreach(ParameterInfo parameters in JARVIS_type_method.GetParameters())
+                        {
+                            Console.WriteLine("{0} {1}", parameters.Name, parameters.ParameterType);
+                        }
+                        // Split string, and convert to the necessary argument types
+                        object[] parameter_array = function_parameters.Split('|').ToArray();
+                        JARVIS_type_method.Invoke(null, parameter_array);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Unable to find method");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Unable to find type");
+                }
                 return true;
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.ToString());
                 return false;
             }
         }
