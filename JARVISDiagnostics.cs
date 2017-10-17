@@ -129,6 +129,48 @@ namespace JARVIS4
                 return false;
             }
         }
+        /// <summary>
+        /// Runs a JARVIS function
+        /// Will create an instance of the type if the type needs a constructor
+        /// </summary>
+        /// <param name="type_name"></param>
+        /// <param name="function_name"></param>
+        /// <param name="function_parameters"></param>
+        /// <returns></returns>
+        public static bool run_JARVIS_function(string type_name, string function_name, object[] function_parameters)
+        {
+            try
+            {
+                Type JARVIS_type = Type.GetType(String.Format("JARVIS4.{0}", type_name));
+                if (JARVIS_type != null)
+                {
+                    MethodInfo JARVIS_type_method = JARVIS_type.GetMethod(function_name);
+                    if (JARVIS_type_method != null)
+                    {
+                        foreach (ParameterInfo parameters in JARVIS_type_method.GetParameters())
+                        {
+                            Console.WriteLine("{0} {1}", parameters.Name, parameters.ParameterType);
+                        }
+                        // Split string, and convert to the necessary argument types
+                        JARVIS_type_method.Invoke(null, function_parameters);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Unable to find method");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Unable to find type");
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return false;
+            }
+        }
         public static string get_JARVIS_executable_path()
         {
             string JARVIS_executable_path = "";
@@ -142,6 +184,35 @@ namespace JARVIS4
                 Console.WriteLine(ex.ToString());
             }
             return JARVIS_executable_path;
+        }
+        public static object[] string_to_parameter_list(MethodInfo target_method, string parameters)
+        {
+            List<object> object_list = new List<object>();
+            List<string> parameter_list = new List<string>();
+            ParameterInfo[] method_parameters;
+            object[] object_array = new object[0];
+            try
+            {
+                parameter_list = parameters.Split('|').ToList();
+                method_parameters = target_method.GetParameters();
+                if(parameter_list.Count != method_parameters.Length)
+                {
+                    throw new Exception("Insufficient parameters for method");
+                }
+                else
+                {
+                    object_array = new object[method_parameters.Length];
+                    for(int i = 0; i < parameter_list.Count; i++)
+                    {
+                        object_array[i] = Convert.ChangeType(parameter_list[i], method_parameters[i].GetType());
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            return object_array;
         }
     }
 }
