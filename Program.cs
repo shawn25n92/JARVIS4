@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+using System.Threading;
 
 namespace JARVIS4
 {
@@ -111,7 +112,10 @@ namespace JARVIS4
                                 string type_name = command_parameters[1];
                                 string function_name = command_parameters.ElementAtOrDefault(2);
                                 string function_parameters = command_parameters.ElementAtOrDefault(3);
-                                JARVISDiagnostics.run_JARVIS_function(type_name, function_name, function_parameters);
+                                //JARVISDiagnostics.run_JARVIS_function(type_name, function_name, function_parameters);
+                                //object[] arguments = JARVISDiagnostics.string_to_parameter_list(type_name, function_name, function_parameters);
+                                //JARVISDiagnostics.run_JARVIS_function(type_name, function_name, arguments);
+                                JARVISDiagnostics.run_JARVIS_function("JARVIS4", type_name, function_name, function_parameters);
                             }
                             else
                             {
@@ -133,6 +137,8 @@ namespace JARVIS4
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.ToString());
+                    Console.Write("Enter a command: ");
+                    user_input = Console.ReadLine();
                     program_running = true;
                 }
             }

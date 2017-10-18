@@ -94,34 +94,59 @@ namespace JARVIS4
             }
             return JARVIS_type_properties;
         }
-        public static bool run_JARVIS_function(string type_name, string function_name, string function_parameters)
+        /// <summary>
+        /// Run a single JARVIS function
+        /// </summary>
+        /// <param name="namespace_name"></param>
+        /// <param name="type_name"></param>
+        /// <param name="method_name"></param>
+        /// <param name="method_parameters"></param>
+        /// <returns></returns>
+        public static bool run_JARVIS_function(string namespace_name, string type_name, string method_name, string method_parameters)
         {
             try
             {
-                Type JARVIS_type = Type.GetType(String.Format("JARVIS4.{0}", type_name));
-                if (JARVIS_type != null)
+                Type target_type = Type.GetType(String.Format("{0}.{1}", namespace_name, type_name));
+                if (target_type != null)
                 {
-                    MethodInfo JARVIS_type_method = JARVIS_type.GetMethod(function_name);
-                    if(JARVIS_type_method != null)
+                    MethodInfo target_method = target_type.GetMethod(method_name);
+                    if (target_method != null)
                     {
-                        foreach(ParameterInfo parameters in JARVIS_type_method.GetParameters())
+                        List<string> method_parameter_list = method_parameters.Split('|').Select(x => x.Trim()).ToList();
+                        List<object> converted_method_parameter_list = new List<object>();
+                        ParameterInfo[] target_method_parameters = target_method.GetParameters();
+                        if (method_parameter_list.Count != target_method_parameters.Length && target_method_parameters.Length > 0)
                         {
-                            Console.WriteLine("{0} {1}", parameters.Name, parameters.ParameterType);
+                            Console.WriteLine("Insufficient Parameters for method {0}.{1}", type_name, method_name);
+                            return false;
                         }
-                        // Split string, and convert to the necessary argument types
-                        object[] parameter_array = function_parameters.Split('|').ToArray();
-                        JARVIS_type_method.Invoke(null, parameter_array);
+                        else
+                        {
+                            for (int i = 0; i < target_method_parameters.Length; i++)
+                            {
+                                converted_method_parameter_list.Add(Convert.ChangeType(method_parameter_list[i], target_method_parameters[i].ParameterType));
+                            }
+                            if (target_method.IsStatic)
+                            {
+                                target_method.Invoke(null, converted_method_parameter_list.ToArray());
+                            }
+                            else
+                            {
+                                object target_type_instance = Activator.CreateInstance(target_type);
+                                target_method.Invoke(target_type_instance, converted_method_parameter_list.ToArray());
+                            }
+                            return true;
+                        }
                     }
                     else
                     {
-                        Console.WriteLine("Unable to find method");
+                        return false;
                     }
                 }
                 else
                 {
-                    Console.WriteLine("Unable to find type");
+                    return false;
                 }
-                return true;
             }
             catch (Exception ex)
             {
@@ -185,34 +210,47 @@ namespace JARVIS4
             }
             return JARVIS_executable_path;
         }
-        public static object[] string_to_parameter_list(MethodInfo target_method, string parameters)
+        public static object[] string_to_parameter_list(string type_name, string method_name, string parameters)
         {
-            List<object> object_list = new List<object>();
-            List<string> parameter_list = new List<string>();
-            ParameterInfo[] method_parameters;
-            object[] object_array = new object[0];
             try
             {
-                parameter_list = parameters.Split('|').ToList();
-                method_parameters = target_method.GetParameters();
-                if(parameter_list.Count != method_parameters.Length)
+                List<string> parameter_list = parameters.Split('|').Select(x => x.Trim()).ToList();
+                Type JARVIS_type = Type.GetType(String.Format("JARVIS4.{0}", type_name));
+                if (JARVIS_type != null)
                 {
-                    throw new Exception("Insufficient parameters for method");
+                    MethodInfo target_method = JARVIS_type.GetMethod(method_name);
+                    if (target_method != null)
+                    {
+                        ParameterInfo[] target_method_parameters = target_method.GetParameters();
+                        if (target_method_parameters.Length != parameter_list.Count)
+                        {
+                            return null;
+                        }
+                        else
+                        {
+                            List<object> object_list = new List<object>();
+                            for (int i = 0; i < target_method_parameters.Length; i++)
+                            {
+                                object_list.Add(Convert.ChangeType(parameter_list[i], target_method_parameters[i].ParameterType));
+                            }
+                            return object_list.ToArray();
+                        }
+                    }
+                    else
+                    {
+                        return null;
+                    }
                 }
                 else
                 {
-                    object_array = new object[method_parameters.Length];
-                    for(int i = 0; i < parameter_list.Count; i++)
-                    {
-                        object_array[i] = Convert.ChangeType(parameter_list[i], method_parameters[i].GetType());
-                    }
+                    return null;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
-            }
-            return object_array;
+                return null;
+            }   
         }
     }
 }

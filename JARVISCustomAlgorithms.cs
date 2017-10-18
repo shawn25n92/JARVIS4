@@ -149,7 +149,12 @@ namespace JARVIS4
         }
         public static bool randomalgo(string hello)
         {
-            Console.WriteLine("This is a test invoked function");
+            Console.WriteLine("bitch fuck youuuu {0}", hello);
+            return true;
+        }
+        public static bool randomalgo2(int i, int j)
+        {
+            Console.WriteLine(i + j);
             return true;
         }
     }

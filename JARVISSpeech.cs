@@ -12,5 +12,10 @@ namespace JARVIS4
         {
 
         }
+        public bool randomfunc()
+        {
+            Console.WriteLine("randomfunc");
+            return true;
+        }
     }
 }
