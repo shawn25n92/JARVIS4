@@ -51,6 +51,7 @@
     <Compile Include="JARVISLearning.cs" />
     <Compile Include="JARVISPatternRecognition.cs" />
     <Compile Include="JARVISSpeech.cs" />
+    <Compile Include="JARVISWeb.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

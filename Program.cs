@@ -122,6 +122,18 @@ namespace JARVIS4
                                 Console.WriteLine("Unable to peform operation \"run\". Type name not provided");
                             }
                         }
+                        else if (primary_command == "add")
+                        {
+                            string secondary_command = command_parameters.ElementAtOrDefault(1);
+                            if(secondary_command != null)
+                            {
+
+                            }
+                            else
+                            {
+                                Console.WriteLine("Unable to perform operation \"add\". Insufficient Information Provided");
+                            }
+                        }
                         else
                         {
                             Console.WriteLine("Unable to perform operation \"start\". Insufficient information provided");
