@@ -252,5 +252,19 @@ namespace JARVIS4
                 return null;
             }   
         }
+        public static bool create_JARVIS_type()
+        {
+            try
+            {
+                Assembly JARVIS_assembly = Assembly.GetExecutingAssembly();
+                
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+                return false;
+            }
+        }
     }
 }

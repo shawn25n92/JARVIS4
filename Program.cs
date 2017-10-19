@@ -122,12 +122,24 @@ namespace JARVIS4
                                 Console.WriteLine("Unable to peform operation \"run\". Type name not provided");
                             }
                         }
-                        else if (primary_command == "add")
+                        else if (primary_command == "thread")
                         {
                             string secondary_command = command_parameters.ElementAtOrDefault(1);
                             if(secondary_command != null)
                             {
+                                if (secondary_command == "add")
+                                {
+                                    Thread new_thread = new Thread(new ThreadStart(JARVISCustomAlgorithms.randomalgo3));
+                                    new_thread.Start();
+                                }
+                                else if (secondary_command == "stop")
+                                {
 
+                                }
+                                else if (secondary_command == "stopall")
+                                {
+
+                                }
                             }
                             else
                             {
