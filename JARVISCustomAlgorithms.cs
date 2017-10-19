@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Globalization;
+using System.Threading;
 
 namespace JARVIS4
 {
@@ -73,8 +74,11 @@ namespace JARVIS4
                 while(start_date <= end_date)
                 {
                     Dictionary<string, int> requests_per_hour = new Dictionary<string, int>();
-                    Dictionary<string, int> unique_sessions_per_hour = new Dictionary<string, int>();
+                    Dictionary<string, Dictionary<string, int>> unique_sessions_per_hour = new Dictionary<string, Dictionary<string, int>>();
+                    Dictionary<string, int> unique_sessions_temp = new Dictionary<string, int>();
+                    Dictionary<string, int> fusebox_fuseaction_count = new Dictionary<string, int>();
                     string file_name = start_date.ToString("yyyy-MM-dd");
+                    File.Create(String.Format(String.Format(@"{0}\{1}_analytics.txt", file_path, file_name))).Close();
                     StreamWriter date_analytics = new StreamWriter(String.Format(@"{0}\{1}_analytics.txt", file_path, file_name), append: true);
                     
                     
@@ -85,11 +89,30 @@ namespace JARVIS4
                     int count = 0;
                     while((line=target_file_buffered_streamed.ReadLine())!= null)
                     {
+                        
                         List<string> parameter_list = line.Split('\t').ToList();
                         string datepart = parameter_list[1].Split(' ')[0];
                         string timepart = parameter_list[1].Split(' ')[1];
                         string hour = timepart.Split(':')[0];
-                        Console.WriteLine(hour);
+                        if (!unique_sessions_per_hour.ContainsKey(hour))
+                        {
+                            unique_sessions_per_hour.Add(hour, new Dictionary<string, int>());
+                        }
+                        if(parameter_list.ElementAtOrDefault(5) != null)
+                        {
+                            string querystring = parameter_list[5].ToLower();
+                            List<string> url_parameter_list = querystring.Split('&').ToList();
+                            Console.WriteLine(url_parameter_list.Count);
+                            if(url_parameter_list.Any(x=>x.Contains("cfid")) && url_parameter_list.Any(x => x.Contains("cftoken")))
+                            {
+                                string cfid = url_parameter_list.Where(x => x.Contains("cfid")).FirstOrDefault();
+                                string cftoken = url_parameter_list.Where(x => x.Contains("cftoken")).FirstOrDefault();
+                                if (!unique_sessions_per_hour[hour].ContainsKey(String.Format("{0}.{1}", cfid, cftoken)))
+                                {
+                                    unique_sessions_per_hour[hour].Add(String.Format("{0}.{1}", cfid, cftoken), 0);
+                                }
+                            }
+                        }
                         if (requests_per_hour.ContainsKey(hour))
                         {
                             requests_per_hour[hour] = requests_per_hour[hour] + 1;
@@ -104,6 +127,10 @@ namespace JARVIS4
                     foreach(KeyValuePair<string,int> request_count in requests_per_hour)
                     {
                         date_analytics.WriteLine("{0}\t{1} requests", request_count.Key, request_count.Value);
+                    }
+                    foreach(KeyValuePair<string,Dictionary<string,int>> unique_session_count in unique_sessions_per_hour)
+                    {
+                        date_analytics.WriteLine("{0}\t{1} sessions", unique_session_count.Key, unique_session_count.Value.Count);
                     }
                     date_analytics.Close();
                     start_date = start_date.AddDays(1);
