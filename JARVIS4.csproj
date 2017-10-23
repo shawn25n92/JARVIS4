@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="JARVISConsole.cs" />
     <Compile Include="JARVISCustomAlgorithms.cs" />
+    <Compile Include="JARVISDataSourceManager.cs" />
     <Compile Include="JARVISDiagnostics.cs" />
     <Compile Include="JARVISException.cs" />
     <Compile Include="JARVISFileProcessing.cs" />
@@ -54,6 +55,7 @@
     <Compile Include="JARVISWeb.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StatusObject.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
