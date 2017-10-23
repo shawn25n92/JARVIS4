@@ -268,7 +268,7 @@ namespace JARVIS4
         }
         public static List<string> get_executable_list()
         {
-            
+            return new List<string>();
         }
     }
 }

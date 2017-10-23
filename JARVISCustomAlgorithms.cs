@@ -203,13 +203,20 @@ namespace JARVIS4
         }
         public static void randomalgo3()
         {
-            while (true)
+            try
             {
-                Directory.CreateDirectory(@"D:\JARVIS4");
-                StreamWriter file = new StreamWriter(@"D:\JARVIS4\thread.txt", append: true);
-                file.WriteLine("Helloworld");
-                file.Close();
-                Thread.Sleep(3000);
+                while (true)
+                {
+                    Directory.CreateDirectory(@"C:\JARVIS4");
+                    StreamWriter file = new StreamWriter(@"C:\JARVIS4\thread.txt", append: true);
+                    file.WriteLine("Helloworld");
+                    file.Close();
+                    Thread.Sleep(3000);
+                }
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.ToString());
             }
         }
     }
