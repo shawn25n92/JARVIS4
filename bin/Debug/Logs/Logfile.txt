@@ -52297,3 +52297,8 @@
 19/10/2017 9:41:56 PM	hello
 19/10/2017 9:46:21 PM	add thread
 19/10/2017 9:49:39 PM	add thread
+22/10/2017 8:00:47 PM	add thread
+22/10/2017 8:00:59 PM	thread add
+22/10/2017 8:02:16 PM	thread add
+22/10/2017 8:33:43 PM	start process vlc
+22/10/2017 8:33:53 PM	start process explorer

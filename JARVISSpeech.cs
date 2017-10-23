@@ -3,20 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Speech.Synthesis;
+
 
 namespace JARVIS4
 {
-    public class JARVISSpeech
+    public static class JARVISSpeech
     {
-        public JARVISSpeech()
+        public static bool OutputSpeech()
         {
-
+            try
+            {
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
-        public bool randomfunc()
-        {
-            Console.WriteLine("randomfunc");
-            return true;
-        }
-
     }
 }

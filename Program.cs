@@ -20,6 +20,7 @@ namespace JARVIS4
         {
             Dictionary<string, Type> JARVIS_types = new Dictionary<string, Type>();
             Dictionary<string, MethodInfo> JARVIS_methods = new Dictionary<string, MethodInfo>();
+            List<Thread> available_threads = new List<Thread>();
 
             bool program_running = true;
             string user_input = "";
@@ -131,6 +132,8 @@ namespace JARVIS4
                                 {
                                     Thread new_thread = new Thread(new ThreadStart(JARVISCustomAlgorithms.randomalgo3));
                                     new_thread.Start();
+                                    Thread.Sleep(10000);
+                                    new_thread.Abort();
                                 }
                                 else if (secondary_command == "stop")
                                 {

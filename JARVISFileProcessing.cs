@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+
+
 namespace JARVIS4
 {
     /// <summary>
@@ -51,6 +53,19 @@ namespace JARVIS4
             }
             catch (Exception e)
             {
+                return false;
+            }
+        }
+        public static bool read_excel_file(string file_path)
+        {
+            try
+            {
+                
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
                 return false;
             }
         }
