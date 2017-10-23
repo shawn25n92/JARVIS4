@@ -12,7 +12,6 @@ C:\ConsoleApps\JARVIS4\bin\Debug\JARVIS4.exe.config
 C:\ConsoleApps\JARVIS4\bin\Debug\JARVIS4.exe
 C:\ConsoleApps\JARVIS4\bin\Debug\JARVIS4.pdb
 C:\GitHubProjects\JARVIS4\obj\Debug\JARVIS4.csprojResolveAssemblyReference.cache
-C:\GitHubProjects\JARVIS4\obj\Debug\JARVIS4.csproj.ResolveComReference.cache
 C:\GitHubProjects\JARVIS4\obj\Debug\JARVIS4.csproj.CoreCompileInputs.cache
 C:\GitHubProjects\JARVIS4\obj\Debug\JARVIS4.exe
 C:\GitHubProjects\JARVIS4\obj\Debug\JARVIS4.pdb

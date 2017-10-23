@@ -50,6 +50,8 @@
     <Compile Include="JARVISFileProcessing.cs" />
     <Compile Include="JARVISFileProcessingAlgorithms.cs" />
     <Compile Include="JARVISLearning.cs" />
+    <Compile Include="JARVISMedia.cs" />
+    <Compile Include="JARVISMultiTasking.cs" />
     <Compile Include="JARVISPatternRecognition.cs" />
     <Compile Include="JARVISSpeech.cs" />
     <Compile Include="JARVISWeb.cs" />

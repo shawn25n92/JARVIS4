@@ -52308,3 +52308,18 @@
 10/23/2017 10:12:23 AM	thread add
 10/23/2017 10:13:08 AM	thread add
 10/23/2017 10:13:38 AM	hkhk
+10/23/2017 2:44:59 PM	datasource add
+10/23/2017 2:45:55 PM	datasource add
+10/23/2017 2:48:02 PM	sql2008kl claims_dev sa password
+10/23/2017 2:48:16 PM	datasource add sql2008kl claims_dev sa password
+10/23/2017 2:48:27 PM	datasource add sql2008kl claims_dev sa passwr
+10/23/2017 2:49:30 PM	datasource add 
+10/23/2017 2:50:19 PM	datasource add
+10/23/2017 2:50:40 PM	exit
+10/23/2017 2:50:45 PM	datasource add
+10/23/2017 2:51:00 PM	
+10/23/2017 2:51:19 PM	datasource add sql2008kl
+10/23/2017 2:51:28 PM	datasource add sql2008kl sa
+10/23/2017 2:51:49 PM	datasource add sql2008kl claims_dev
+10/23/2017 2:51:54 PM	datasource add sql2008kl claims_dev sa
+10/23/2017 2:52:00 PM	datasource add sql2008kl claims_dev sa password

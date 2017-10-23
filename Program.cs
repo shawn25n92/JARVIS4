@@ -149,6 +149,26 @@ namespace JARVIS4
                                 Console.WriteLine("Unable to perform operation \"add\". Insufficient Information Provided");
                             }
                         }
+                        else if (primary_command == "datasource")
+                        {
+                            string secondary_command = command_parameters.ElementAtOrDefault(1);
+                            string server_name = command_parameters.ElementAtOrDefault(2);
+                            string database_name = command_parameters.ElementAtOrDefault(3);
+                            string database_user_id = command_parameters.ElementAtOrDefault(4);
+                            string database_password = command_parameters.ElementAtOrDefault(5);
+                            if (secondary_command != null && secondary_command.Length > 0)
+                            {
+                                if (secondary_command == "add")
+                                {
+                                    StatusObject SO_dbconnect = JARVISDataSourceManager.ConnectToDataSource(server_name, database_name, database_user_id, database_password);
+                                    if(SO_dbconnect.Status == StatusObject.StatusCode.FAILURE)
+                                    {
+                                        Console.WriteLine(SO_dbconnect.ErrorStacktrace);
+                                    }
+                                }
+                            }
+                            
+                        }
                         else
                         {
                             Console.WriteLine("Unable to perform operation \"start\". Insufficient information provided");
