@@ -11,6 +11,7 @@ namespace JARVIS4
     /// </summary>
     public static class JARVISLearning
     {
+        private static string file_directory = "";
         public static bool log_command(string executable_root, string folder_name, string log_file_name, string log_message)
         {
             try

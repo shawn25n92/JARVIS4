@@ -42,6 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="JARVISDataSource.cs" />
+    <Compile Include="JARVISDataSourceAlgorithms.cs" />
     <Compile Include="JARVISConsole.cs" />
     <Compile Include="JARVISCustomAlgorithms.cs" />
     <Compile Include="JARVISDataSourceManager.cs" />

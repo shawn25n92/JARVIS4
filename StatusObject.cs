@@ -17,6 +17,7 @@ namespace JARVIS4
         public string ErrorCode { get; set; }
         public StatusCode Status { get; set; }
         public string ErrorStacktrace { get; set; }
+        public dynamic UDDynamic { get; set; }
         public StatusObject()
         {
             this.Status = StatusCode.SUCCESS;
