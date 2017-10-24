@@ -188,6 +188,32 @@ namespace JARVIS4
                                     string sql = user_input.Replace("datasource", "").Replace("sqlexecute", "").Trim();
                                     JARVISDataSourceAlgorithms.ExecuteSQL(new JARVISDataSource("sql2008kl", "claims_dev", "sa", "password").CreateConnection(), sql);
                                 }
+                                else if (secondary_command == "ssptofile")
+                                {
+                                    string server_name = command_parameters.ElementAtOrDefault(3);
+                                    string database_name = command_parameters.ElementAtOrDefault(4);
+                                    string database_user_id = command_parameters.ElementAtOrDefault(5);
+                                    string database_password = command_parameters.ElementAtOrDefault(6);
+                                    JARVISDataSource target_datasource = new JARVISDataSource();
+                                    if (auth_type == "sqlauth")
+                                    {
+                                        target_datasource = new JARVISDataSource(server_name, database_name, database_user_id, database_password);
+                                    }
+                                    else if(auth_type == "winauth")
+                                    {
+                                        target_datasource = new JARVISDataSource(server_name, database_name);
+                                    }
+                                    StatusObject SO_ssptofile = JARVISDataSourceAlgorithms.StoredProceduresToFile(target_datasource.CreateConnection());
+                                    if (SO_ssptofile.Status != StatusObject.StatusCode.FAILURE)
+                                    {
+
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine(SO_ssptofile.ErrorStacktrace);
+                                    }
+
+                                }
                             }
                         }
                         else

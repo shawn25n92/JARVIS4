@@ -52348,3 +52348,15 @@
 10/24/2017 10:37:58 AM	datasource add winauth 2012stage mpartsdb
 10/24/2017 2:32:41 PM	datasource sqlexecute select * from trx0008
 10/24/2017 2:35:07 PM	datasource sqlexecute select * from trx0008
+10/24/2017 4:39:56 PM	datasource sqlexecute select * from trx0008
+10/24/2017 4:42:42 PM	datasource sqlexecute select * from trx0008
+10/24/2017 4:47:50 PM	datasource sqlexecute (set nocount on;select * from trx0008)
+10/24/2017 5:04:38 PM	datasource ssptofile
+10/24/2017 5:06:50 PM	datasource ssptofile
+10/24/2017 5:08:09 PM	datasource ssptofile
+10/24/2017 5:14:17 PM	datasource ssptofile
+10/24/2017 5:17:07 PM	datasource ssptofile
+10/24/2017 5:17:58 PM	datasource ssptofile
+10/24/2017 5:19:09 PM	datasource ssptofile
+10/24/2017 5:29:55 PM	datasource ssptofile sqlauth sql2008kl claims_dev sa password
+10/24/2017 5:30:10 PM	datasource ssptofile sqlauth sql2008kl merimen_ic21 sa password

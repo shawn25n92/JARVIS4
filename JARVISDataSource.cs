@@ -40,6 +40,10 @@ namespace JARVIS4
         {
 
         }
+        public JARVISDataSource()
+        {
+
+        }
         public string GetConnectionString()
         {
             string connection_string = "";
