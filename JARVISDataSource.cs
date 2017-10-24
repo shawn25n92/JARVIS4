@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -65,6 +66,19 @@ namespace JARVIS4
                     true);
             }
             return connection_string;
+        }
+        public SqlConnection CreateConnection()
+        {
+            SqlConnection new_connection = new SqlConnection();
+            try
+            {
+                new_connection = new SqlConnection(GetConnectionString());
+            }
+            catch(Exception e)
+            {
+                new_connection = null;
+            }
+            return new_connection;
         }
     }
 }

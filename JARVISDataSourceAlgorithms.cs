@@ -24,5 +24,26 @@ namespace JARVIS4
             }
             return SO;
         }
+        public static StatusObject ExecuteSQL(SqlConnection DatabaseConnection, string SQLCommandString)
+        {
+            StatusObject SO = new StatusObject();
+            SqlCommand new_command = new SqlCommand(SQLCommandString, DatabaseConnection);
+            DatabaseConnection.Open();
+            SqlDataReader reader = new_command.ExecuteReader();
+            try
+            {
+                
+                while (reader.Read())
+                {
+                    Console.WriteLine("{0} {1}", reader[0], reader[1]);
+                }
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+            DatabaseConnection.Close();
+            return SO;
+        }
     }
 }

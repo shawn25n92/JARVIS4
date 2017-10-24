@@ -21,6 +21,7 @@ namespace JARVIS4
             Dictionary<string, Type> JARVIS_types = new Dictionary<string, Type>();
             Dictionary<string, MethodInfo> JARVIS_methods = new Dictionary<string, MethodInfo>();
             List<Thread> available_threads = new List<Thread>();
+            List<JARVISDataSource> available_datasources = new List<JARVISDataSource>();
 
             bool program_running = true;
             string user_input = "";
@@ -182,6 +183,11 @@ namespace JARVIS4
                                     }
                                     
                                 }
+                                else if(secondary_command == "sqlexecute")
+                                {
+                                    string sql = user_input.Replace("datasource", "").Replace("sqlexecute", "").Trim();
+                                    JARVISDataSourceAlgorithms.ExecuteSQL(new JARVISDataSource("sql2008kl", "claims_dev", "sa", "password").CreateConnection(), sql);
+                                }
                             }
                         }
                         else
@@ -194,6 +200,7 @@ namespace JARVIS4
                     else
                     {
                         program_running = false;
+                        // Do exit logic here
                     }
                 }
                 catch (Exception ex)

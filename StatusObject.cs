@@ -13,8 +13,8 @@ namespace JARVIS4
             SUCCESS,
             FAILURE
         }
-        public string ErrorMessage { get; set; }
         public string ErrorCode { get; set; }
+        public string ErrorMessage { get; set; }
         public StatusCode Status { get; set; }
         public string ErrorStacktrace { get; set; }
         public dynamic UDDynamic { get; set; }

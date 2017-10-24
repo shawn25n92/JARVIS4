@@ -52346,3 +52346,5 @@
 10/24/2017 10:36:48 AM	datasource add winauth 2012stage mpartsdb
 10/24/2017 10:37:45 AM	datasource add winauth 2012stage mpartsdb
 10/24/2017 10:37:58 AM	datasource add winauth 2012stage mpartsdb
+10/24/2017 2:32:41 PM	datasource sqlexecute select * from trx0008
+10/24/2017 2:35:07 PM	datasource sqlexecute select * from trx0008
