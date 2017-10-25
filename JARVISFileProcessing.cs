@@ -69,5 +69,18 @@ namespace JARVIS4
                 return false;
             }
         }
+        public static StatusObject CompareFileHashes()
+        {
+            StatusObject SO = new StatusObject();
+            try
+            {
+
+            }
+            catch(Exception e)
+            {
+                SO = new StatusObject(e.Message, "FILEHASHMISMATCH", StatusObject.StatusCode.FAILURE, e.ToString());
+            }
+            return SO;
+        }
     }
 }

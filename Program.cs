@@ -30,7 +30,7 @@ namespace JARVIS4
 
             while (program_running)
             {
-                JARVISLearning.log_command(JARVISDiagnostics.get_JARVIS_executable_path(), "Logs", "Logfile.txt", user_input);
+                JARVISLearning.log_command(user_input);
                 List<string> command_parameters = user_input.Split(' ').ToList();
                 string primary_command = command_parameters[0].Trim().ToLower();
                 try

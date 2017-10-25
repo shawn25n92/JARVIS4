@@ -76,7 +76,8 @@ namespace JARVIS4
             SqlConnection new_connection = new SqlConnection();
             try
             {
-                new_connection = new SqlConnection(GetConnectionString());
+                new_connection = new SqlConnection();
+                new_connection.ConnectionString = this.GetConnectionString();
             }
             catch(Exception e)
             {

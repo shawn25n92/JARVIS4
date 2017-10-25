@@ -81,7 +81,8 @@ namespace JARVIS4
             
             try
             {
-                Directory.CreateDirectory(file_directory);
+                string ssp_directory = String.Format(@"{0}\StoredProcedures\{1}", file_directory, DatabaseConnection.Database);
+                Directory.CreateDirectory(ssp_directory);
                 DatabaseConnection.Open();
                 SqlDataReader reader = stored_procedure_list_query.ExecuteReader();
                 List<string> stored_procedure_list = new List<string>();
@@ -104,7 +105,7 @@ namespace JARVIS4
                     SqlDataReader stored_procedure_content_reader = stored_procedure_content.ExecuteReader();
                     while (stored_procedure_content_reader.Read())
                     {
-                        StreamWriter stored_procedure_file = new StreamWriter(String.Format(@"{0}\{1}.txt", file_directory, stored_procedure));
+                        StreamWriter stored_procedure_file = new StreamWriter(String.Format(@"{0}\{1}.txt", ssp_directory, stored_procedure));
                         stored_procedure_file.Write(stored_procedure_content_reader[0]);
                         stored_procedure_file.Close();
                     }

@@ -52360,3 +52360,4 @@
 10/24/2017 5:19:09 PM	datasource ssptofile
 10/24/2017 5:29:55 PM	datasource ssptofile sqlauth sql2008kl claims_dev sa password
 10/24/2017 5:30:10 PM	datasource ssptofile sqlauth sql2008kl merimen_ic21 sa password
+10/25/2017 9:36:55 AM	datasource ssptofile sql2008kl claims_dev sa password
