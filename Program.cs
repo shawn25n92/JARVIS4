@@ -242,6 +242,36 @@ namespace JARVIS4
                                         Thread.Sleep(60000);
                                     }
                                 }
+                                else if (secondary_command == "multidbssptofile")
+                                {
+                                    if (File.Exists(@"C:\JARVIS4\UserDefinedDataSources\BatchExtracts\targets.txt"))
+                                    {
+                                        StreamReader file_reader = new StreamReader(@"C:\JARVIS4\UserDefinedDataSources\BatchExtracts\targets.txt");
+                                        string databaseconfig;
+                                        while ((databaseconfig = file_reader.ReadLine()) != null)
+                                        {
+                                            Console.WriteLine(databaseconfig);
+                                            JARVISDataSource target_datasource = new JARVISDataSource(databaseconfig);
+                                            StatusObject SO_ssptofile = JARVISDataSourceAlgorithms.StoredProceduresToFile(target_datasource.CreateConnection());
+                                            if (SO_ssptofile.Status != StatusObject.StatusCode.FAILURE)
+                                            {
+
+                                            }
+                                            else
+                                            {
+                                                Console.WriteLine(SO_ssptofile.ErrorStacktrace);
+                                            }
+                                        }
+                                        file_reader.Close();
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine(@"Unable to find batch scripts. Please place batch scripts in \nC:\JARVIS4\UserDefinedDataSources\BatchExtracts\targets.txt");
+                                        Directory.CreateDirectory(@"C:\JARVIS4\UserDefinedDataSources\BatchExtracts");
+                                        StreamWriter new_file = new StreamWriter(@"C:\JARVIS4\UserDefinedDataSources\BatchExtracts\targets.txt");
+                                        new_file.Close();
+                                    }
+                                }
                             }
                         }
                         else

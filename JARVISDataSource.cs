@@ -38,7 +38,22 @@ namespace JARVIS4
         }
         public JARVISDataSource(string ConnectionString)
         {
-
+            List<string> ConnectionStringParameters = ConnectionString.Split(';').Select(x => x.Trim()).ToList();
+            if(ConnectionStringParameters.Count == 2)
+            {
+                this.Server = ConnectionStringParameters[0];
+                this.Database = ConnectionStringParameters[1];
+                this.TrustedConnection = true;
+                this.AuthenticationType = "winauth";
+            }
+            else if(ConnectionStringParameters.Count == 4)
+            {
+                this.Server = ConnectionStringParameters[0];
+                this.Database = ConnectionStringParameters[1];
+                this.UserID = ConnectionStringParameters[2];
+                this.Password = ConnectionStringParameters[3];
+                this.AuthenticationType = "sqlauth";
+            }
         }
         public JARVISDataSource()
         {
@@ -64,7 +79,7 @@ namespace JARVIS4
                 connection_string = String.Format(
                     "server={0};" +
                     "database={1};" +
-                    "trusted_connection={2};" +
+                    "trusted_connection=true;",
                     this.Server,
                     this.Database,
                     true);
