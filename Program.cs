@@ -274,6 +274,18 @@ namespace JARVIS4
                                 }
                             }
                         }
+                        else if (primary_command == "record")
+                        {
+                            string secondary_command = command_parameters.ElementAtOrDefault(1);
+                            if (secondary_command != null)
+                            {
+
+                            }
+                            else
+                            {
+                                Console.WriteLine("Incorrect syntax for command {0}", primary_command);
+                            }
+                        }
                         else
                         {
                             Console.WriteLine("Unable to perform operation \"start\". Insufficient information provided");
