@@ -212,7 +212,35 @@ namespace JARVIS4
                                     {
                                         Console.WriteLine(SO_ssptofile.ErrorStacktrace);
                                     }
+                                }
+                                else if (secondary_command == "tracksspchanges")
+                                {
+                                    string server_name = command_parameters.ElementAtOrDefault(3);
+                                    string database_name = command_parameters.ElementAtOrDefault(4);
+                                    string database_user_id = command_parameters.ElementAtOrDefault(5);
+                                    string database_password = command_parameters.ElementAtOrDefault(6);
+                                    JARVISDataSource target_datasource = new JARVISDataSource();
+                                    if (auth_type == "sqlauth")
+                                    {
+                                        target_datasource = new JARVISDataSource(server_name, database_name, database_user_id, database_password);
+                                    }
+                                    else if (auth_type == "winauth")
+                                    {
+                                        target_datasource = new JARVISDataSource(server_name, database_name);
+                                    }
+                                    while (true)
+                                    {
+                                        StatusObject SO_ssptofile = JARVISDataSourceAlgorithms.TrackStoredProcedureChanges(target_datasource.CreateConnection());
+                                        if (SO_ssptofile.Status != StatusObject.StatusCode.FAILURE)
+                                        {
 
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine(SO_ssptofile.ErrorStacktrace);
+                                        }
+                                        Thread.Sleep(60000);
+                                    }
                                 }
                             }
                         }

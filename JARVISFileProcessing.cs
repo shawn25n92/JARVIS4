@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
-
+using System.Security.Cryptography;
 
 namespace JARVIS4
 {
@@ -69,12 +69,12 @@ namespace JARVIS4
                 return false;
             }
         }
-        public static StatusObject CompareFileHashes()
+        public static StatusObject CompareFileHashes(string OriginalText, string NewText)
         {
             StatusObject SO = new StatusObject();
             try
             {
-
+                MD5 hashGenerator = MD5.Create();
             }
             catch(Exception e)
             {
