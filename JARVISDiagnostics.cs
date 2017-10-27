@@ -210,7 +210,7 @@ namespace JARVIS4
             }
             return JARVIS_executable_path;
         }
-        public static object[] string_to_parameter_list(string type_name, string method_name, string parameters)
+        public static object[] StringToParameterList(string type_name, string method_name, string parameters)
         {
             try
             {
@@ -252,7 +252,7 @@ namespace JARVIS4
                 return null;
             }   
         }
-        public static bool create_JARVIS_type()
+        public static bool CreateJARVISType()
         {
             try
             {
@@ -266,9 +266,37 @@ namespace JARVIS4
                 return false;
             }
         }
-        public static List<string> get_executable_list()
+        public static List<string> FindExecutable()
         {
             return new List<string>();
+        }
+        public static List<string> FindMethod(string JARVISMethod)
+        {
+            List<string> returned_list = new List<string>();
+            try
+            {
+                Assembly JARVISAssembly = Assembly.GetExecutingAssembly();
+                Type[] JARVISTypes = JARVISAssembly.GetTypes();
+                foreach(Type JARVISType in JARVISTypes)
+                {
+                    List<MethodInfo> JARVISTypeMethods = JARVISType.GetMethods().Where(x => x.Name.ToLower().Contains(JARVISMethod.ToLower())).ToList();
+                    if(JARVISTypeMethods.Count > 0)
+                    {
+                        foreach(MethodInfo JARVISTypeMethod in JARVISTypeMethods)
+                        {
+                            returned_list.Add(String.Format("Type Name: {0}|Method Name:{1}", JARVISType.Name, JARVISTypeMethod.Name));
+                        }
+                        
+                    }
+                }
+
+            }
+            catch(Exception e)
+            {
+                returned_list = new List<string>();
+                returned_list.Add(e.ToString());
+            }
+            return returned_list;
         }
     }
 }

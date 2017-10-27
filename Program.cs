@@ -65,6 +65,23 @@ namespace JARVIS4
 
                             }
                         }
+                        else if(primary_command == "help")
+                        {
+                            string secondary_command = command_parameters.ElementAtOrDefault(1);
+                            if(secondary_command != null)
+                            {
+                                if(secondary_command == "method")
+                                {
+                                    string method_name = command_parameters.ElementAtOrDefault(2);
+                                    List<string> method_list = new List<string>();
+                                    if(method_name != null)
+                                    {
+                                        method_list = JARVISDiagnostics.FindMethod(method_name);
+                                        JARVISConsole.list_to_console(method_list);
+                                    }
+                                }
+                            }
+                        }
                         else if (primary_command == "new")
                         {
                             if (command_parameters.ElementAtOrDefault(1) != null)
@@ -288,7 +305,7 @@ namespace JARVIS4
                         }
                         else
                         {
-                            Console.WriteLine("Unable to perform operation \"start\". Insufficient information provided");
+                            Console.WriteLine("Invalid Command");
                         }
                         Console.Write("Enter a command: ");
                         user_input = Console.ReadLine();
