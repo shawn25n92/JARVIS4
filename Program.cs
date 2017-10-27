@@ -245,7 +245,8 @@ namespace JARVIS4
                                     {
                                         target_datasource = new JARVISDataSource(server_name, database_name);
                                     }
-                                    while (true)
+                                    bool tracking = true;
+                                    while (tracking)
                                     {
                                         StatusObject SO_ssptofile = JARVISDataSourceAlgorithms.TrackStoredProcedureChanges(target_datasource.CreateConnection());
                                         if (SO_ssptofile.Status != StatusObject.StatusCode.FAILURE)
@@ -255,6 +256,7 @@ namespace JARVIS4
                                         else
                                         {
                                             Console.WriteLine(SO_ssptofile.ErrorStacktrace);
+                                            tracking = false;
                                         }
                                         Thread.Sleep(60000);
                                     }
