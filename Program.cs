@@ -303,6 +303,10 @@ namespace JARVIS4
                                 Console.WriteLine("Incorrect syntax for command {0}", primary_command);
                             }
                         }
+                        else if (primary_command == "winform")
+                        {
+                            
+                        }
                         else
                         {
                             Console.WriteLine("Invalid Command");

@@ -13,5 +13,24 @@ namespace JARVIS4
         {
             return true;
         }
+        public static StatusObject RecordHTTPRequest()
+        {
+            StatusObject SO = new StatusObject();
+            try
+            {
+                HttpListener Listener = new HttpListener();
+                Listener.Prefixes.Add("http://localhost/claims/");
+                Console.WriteLine("Listening");
+                Listener.Start();
+                var Context = Listener.GetContext();
+                var Response = Context.Response;
+
+            }
+            catch (Exception e)
+            {
+
+            }
+            return SO;
+        }
     }
 }
