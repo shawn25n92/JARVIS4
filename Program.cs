@@ -309,6 +309,18 @@ namespace JARVIS4
                         {
                             
                         }
+                        else if (primary_command == "writetoexcel")
+                        {
+                            StatusObject SO_WriteToExcel = JARVISFileProcessing.WriteExcelFile();
+                            if(SO_WriteToExcel.Status != StatusObject.StatusCode.FAILURE)
+                            {
+
+                            }
+                            else
+                            {
+                                Console.WriteLine(SO_WriteToExcel.ErrorStacktrace);
+                            }
+                        }
                         else
                         {
                             Console.WriteLine("Invalid Command");
