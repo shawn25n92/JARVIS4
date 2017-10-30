@@ -235,7 +235,15 @@ namespace JARVIS4
                     if (fusebox.Contains("cfcase") && !fusebox.Contains("/cfcase"))
                     {
                         Console.WriteLine(fusebox.Replace("<!---", "").Replace("--->", "").Replace("<", "").Replace("cfcase value=\"", "").Replace("\">", "").Trim());
-
+                        int current_line = i;
+                        for(current_line = i; current_line < code_list.Count; current_line++)
+                        {
+                            if (code_list[current_line].Contains("cfinclude"))
+                            {
+                                Console.WriteLine(code_list[current_line]);
+                                break;
+                            }
+                        }
                     }
 
                     if (fusebox.Contains("mtrroot,approot"))

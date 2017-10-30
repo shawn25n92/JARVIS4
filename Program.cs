@@ -99,9 +99,9 @@ namespace JARVIS4
                         }
                         else if (primary_command == "diagnostics")
                         {
-                            JARVISConsole.list_to_console(JARVISDiagnostics.list_JARVIS_types());
-                            JARVISConsole.list_to_console(JARVISDiagnostics.list_JARVIS_type_properties("JARVIS4.JARVISLearning"));
-                            Console.WriteLine("Path = {0}", JARVISDiagnostics.get_JARVIS_executable_path());
+                            JARVISConsole.list_to_console(JARVISDiagnostics.ListJARVISTypes());
+                            JARVISConsole.list_to_console(JARVISDiagnostics.ListJARVISTypeProperties("JARVIS4.JARVISLearning"));
+                            Console.WriteLine("Path = {0}", JARVISDiagnostics.GetJARVISExecutablePath());
                         }
                         else if (primary_command == "read")
                         {
@@ -122,7 +122,7 @@ namespace JARVIS4
                         else if (primary_command == "customalgo")
                         {
                             Console.WriteLine("JARVIS Custom Algorithms");
-                            JARVISConsole.list_to_console(JARVISDiagnostics.list_JARVIS_type_properties("JARVIS4.JARVISCustomAlgorithms"));
+                            JARVISConsole.list_to_console(JARVISDiagnostics.ListJARVISTypeProperties("JARVIS4.JARVISCustomAlgorithms"));
                         }
                         else if (primary_command == "fileprocessing")
                         {
@@ -146,7 +146,7 @@ namespace JARVIS4
                                 //JARVISDiagnostics.run_JARVIS_function(type_name, function_name, function_parameters);
                                 //object[] arguments = JARVISDiagnostics.string_to_parameter_list(type_name, function_name, function_parameters);
                                 //JARVISDiagnostics.run_JARVIS_function(type_name, function_name, arguments);
-                                JARVISDiagnostics.run_JARVIS_function("JARVIS4", type_name, function_name, function_parameters);
+                                JARVISDiagnostics.RunJARVISMethod("JARVIS4", type_name, function_name, function_parameters);
                             }
                             else
                             {

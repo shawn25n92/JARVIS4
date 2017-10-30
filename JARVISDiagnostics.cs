@@ -24,7 +24,7 @@ namespace JARVIS4
                 return false;
             }
         }
-        public static List<string> list_JARVIS_types()
+        public static List<string> ListJARVISTypes()
         {
             List<string> JARVIS_types = new List<string>();
             try
@@ -42,7 +42,7 @@ namespace JARVIS4
             }
             return JARVIS_types;
         }
-        public static List<MethodInfo> list_JARVIS_type_methods(string type_name)
+        public static List<MethodInfo> ListJARVISTypeMethods(string type_name)
         {
             List<MethodInfo> type_method_list = new List<MethodInfo>();
             try
@@ -56,7 +56,7 @@ namespace JARVIS4
             }
             return type_method_list;
         }
-        public static List<string> list_JARVIS_type_properties(string JARVIS_type_full_name)
+        public static List<string> ListJARVISTypeProperties(string JARVIS_type_full_name)
         {
             List<string> JARVIS_type_properties = new List<string>();
             try
@@ -102,7 +102,7 @@ namespace JARVIS4
         /// <param name="method_name"></param>
         /// <param name="method_parameters"></param>
         /// <returns></returns>
-        public static bool run_JARVIS_function(string namespace_name, string type_name, string method_name, string method_parameters)
+        public static bool RunJARVISMethod(string namespace_name, string type_name, string method_name, string method_parameters)
         {
             try
             {
@@ -154,6 +154,8 @@ namespace JARVIS4
                 return false;
             }
         }
+        
+
         /// <summary>
         /// Runs a JARVIS function
         /// Will create an instance of the type if the type needs a constructor
@@ -162,7 +164,7 @@ namespace JARVIS4
         /// <param name="function_name"></param>
         /// <param name="function_parameters"></param>
         /// <returns></returns>
-        public static bool run_JARVIS_function(string type_name, string function_name, object[] function_parameters)
+        public static bool RunJARVISMethod(string type_name, string function_name, object[] function_parameters)
         {
             try
             {
@@ -196,7 +198,7 @@ namespace JARVIS4
                 return false;
             }
         }
-        public static string get_JARVIS_executable_path()
+        public static string GetJARVISExecutablePath()
         {
             string JARVIS_executable_path = "";
             try
