@@ -105,7 +105,19 @@ namespace JARVIS4
                         }
                         else if (primary_command == "read")
                         {
-                            JARVISCustomAlgorithms.MerimenRequestStatistics_Analyze(@"C:\Users\shawn\Documents\MERIMEN CUSTOMIZATIONS\#22773\Split Files");
+                            JARVISCustomAlgorithms.MerimenRequestStatistics_Analyze(@"C:\JARVIS4\CustomAlgorithmSources\MERIMEN");
+                        }
+                        else if(primary_command == "getfuseboxfuseaction")
+                        {
+                            StatusObject SO_GetFuseboxFuseaction = JARVISCustomAlgorithms.GetFuseboxFuseactionList();
+                            if(SO_GetFuseboxFuseaction.Status != StatusObject.StatusCode.FAILURE)
+                            {
+
+                            }
+                            else
+                            {
+                                Console.WriteLine(SO_GetFuseboxFuseaction.ErrorStacktrace);
+                            }
                         }
                         else if (primary_command == "customalgo")
                         {
@@ -148,10 +160,7 @@ namespace JARVIS4
                             {
                                 if (secondary_command == "add")
                                 {
-                                    Thread new_thread = new Thread(new ThreadStart(JARVISCustomAlgorithms.randomalgo3));
-                                    new_thread.Start();
-                                    Thread.Sleep(10000);
-                                    new_thread.Abort();
+                                    
                                 }
                                 else if (secondary_command == "stop")
                                 {

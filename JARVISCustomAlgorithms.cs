@@ -78,9 +78,12 @@ namespace JARVIS4
                     Dictionary<string, Dictionary<string, int>> unique_users_per_hour = new Dictionary<string, Dictionary<string, int>>();
                     Dictionary<string, int> unique_sessions_temp = new Dictionary<string, int>();
                     Dictionary<string, int> fusebox_fuseaction_count = new Dictionary<string, int>();
+                    List<string> suspicious_fusebox_fuseaction_list = new List<string>();
                     string file_name = start_date.ToString("yyyy-MM-dd");
                     File.Create(String.Format(String.Format(@"{0}\{1}_analytics.txt", file_path, file_name))).Close();
+                    File.Create(String.Format(String.Format(@"{0}\{1}_request_analytics.txt", file_path, file_name))).Close();
                     StreamWriter date_analytics = new StreamWriter(String.Format(@"{0}\{1}_analytics.txt", file_path, file_name), append: true);
+                    StreamWriter request_analytics = new StreamWriter(String.Format(@"{0}\{1}_request_analytics.txt", file_path, file_name), append: true);
 
 
                     FileStream target_file = File.Open(String.Format(@"{0}\{1}.txt", file_path, file_name), FileMode.Open, FileAccess.Read, FileShare.Read);
@@ -106,7 +109,6 @@ namespace JARVIS4
                         if (parameter_list.ElementAtOrDefault(4) != null)
                         {
                             string username = parameter_list.ElementAtOrDefault(4);
-                            Console.WriteLine(parameter_list.ElementAtOrDefault(4));
                             if (!unique_users_per_hour[hour].ContainsKey(username) && username.Trim().Length > 0)
                             {
                                 unique_users_per_hour[hour].Add(username, 0);
@@ -125,6 +127,21 @@ namespace JARVIS4
                                     unique_sessions_per_hour[hour].Add(String.Format("{0}.{1}", cfid, cftoken), 0);
                                 }
                             }
+                            if (url_parameter_list.Any(x => x.Contains("fusebox")) && url_parameter_list.Any(x => x.Contains("fuseaction")))
+                            {
+                                string fusebox = url_parameter_list.Where(x => x.Contains("fusebox")).FirstOrDefault();
+                                string fuseaction = url_parameter_list.Where(x => x.Contains("fuseaction")).FirstOrDefault();
+                                string fusebox_fuseaction = String.Format("{0}&{1}", fusebox, fuseaction);
+                                Console.WriteLine(fusebox_fuseaction);
+                                if (fusebox_fuseaction_count.ContainsKey(fusebox_fuseaction))
+                                {
+                                    fusebox_fuseaction_count[fusebox_fuseaction] = fusebox_fuseaction_count[fusebox_fuseaction] + 1;
+                                }
+                                else
+                                {
+                                    fusebox_fuseaction_count.Add(fusebox_fuseaction, 1);
+                                }
+                            }
                         }
                         if (requests_per_hour.ContainsKey(hour))
                         {
@@ -137,18 +154,35 @@ namespace JARVIS4
                         // Requests per hour
                         count++;
                     }
+                    date_analytics.WriteLine("------------------------------------------------------------");
+                    date_analytics.WriteLine("Requests per hour");
+                    date_analytics.WriteLine("------------------------------------------------------------");
                     foreach (KeyValuePair<string, int> request_count in requests_per_hour)
                     {
                         date_analytics.WriteLine("{0}\t{1} requests", request_count.Key, request_count.Value);
                     }
+                    date_analytics.WriteLine("------------------------------------------------------------");
+                    date_analytics.WriteLine("Unique Sessions Per Hour");
+                    date_analytics.WriteLine("------------------------------------------------------------");
                     foreach (KeyValuePair<string, Dictionary<string, int>> unique_session_count in unique_sessions_per_hour)
                     {
                         date_analytics.WriteLine("{0}\t{1} sessions", unique_session_count.Key, unique_session_count.Value.Count);
                     }
+                    date_analytics.WriteLine("------------------------------------------------------------");
+                    date_analytics.WriteLine("Unique Users Per Hour");
+                    date_analytics.WriteLine("------------------------------------------------------------");
                     foreach (KeyValuePair<string, Dictionary<string, int>> unique_user_count in unique_users_per_hour)
                     {
                         date_analytics.WriteLine("{0}\t{1} unique users", unique_user_count.Key, unique_user_count.Value.Count);
                     }
+                    date_analytics.WriteLine("------------------------------------------------------------");
+                    date_analytics.WriteLine("Fusebox and Fuseaction Tally");
+                    date_analytics.WriteLine("------------------------------------------------------------");
+                    foreach (KeyValuePair<string, int> unique_fusebox_fuseaction in fusebox_fuseaction_count)
+                    {
+                        date_analytics.WriteLine("{0}\t{1} requests", unique_fusebox_fuseaction.Key, unique_fusebox_fuseaction.Value);
+                    }
+
                     date_analytics.Close();
                     start_date = start_date.AddDays(1);
                     target_file.Close();
@@ -180,44 +214,41 @@ namespace JARVIS4
             }
             return ruleset;
         }
-        public static bool customalgo_MERIMEN_analyze_request_string(string request_string)
+
+        public static StatusObject GetFuseboxFuseactionList()
         {
+            StatusObject SO = new StatusObject();
             try
             {
-                return true;
-            }
-            catch(Exception e)
-            {
-                return false;
-            }
-        }
-        public static bool randomalgo(string hello)
-        {
-            Console.WriteLine("bitch fuck youuuu {0}", hello);
-            return true;
-        }
-        public static bool randomalgo2(int i, int j)
-        {
-            Console.WriteLine(i + j);
-            return true;
-        }
-        public static void randomalgo3()
-        {
-            try
-            {
-                while (true)
+                // Get the claims development folder
+                StreamReader claims_index = new StreamReader(@"C:\MERIMEN\claims\index.cfm");
+                Dictionary<string, Dictionary<string, int>> fusebox_fuseaction_dictionary = new Dictionary<string, Dictionary<string, int>>();
+                string line;
+                List<string> code_list = new List<string>();
+                while((line = claims_index.ReadLine())!= null)
                 {
-                    Directory.CreateDirectory(@"C:\JARVIS4");
-                    StreamWriter file = new StreamWriter(@"C:\JARVIS4\thread.txt", append: true);
-                    file.WriteLine("Helloworld");
-                    file.Close();
-                    Thread.Sleep(3000);
+                    code_list.Add(line);
+                }
+                for(int i = 0; i < code_list.Count; i++)
+                {
+                    string fusebox = code_list[i].ToLower();
+                    if (fusebox.Contains("cfcase") && !fusebox.Contains("/cfcase"))
+                    {
+                        Console.WriteLine(fusebox.Replace("<!---", "").Replace("--->", "").Replace("<", "").Replace("cfcase value=\"", "").Replace("\">", "").Trim());
+
+                    }
+
+                    if (fusebox.Contains("mtrroot,approot"))
+                    {
+
+                    }
                 }
             }
             catch(Exception e)
             {
-                Console.WriteLine(e.ToString());
+                SO = new StatusObject(e.Message, "GetFuseboxFuseactionList", StatusObject.StatusCode.FAILURE, e.ToString());
             }
+            return SO;
         }
     }
 }

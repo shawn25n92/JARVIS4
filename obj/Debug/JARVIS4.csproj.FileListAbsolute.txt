@@ -20,3 +20,4 @@ C:\GitHubProjects\JARVIS4\bin\Debug\JARVIS4.exe
 C:\GitHubProjects\JARVIS4\bin\Debug\JARVIS4.pdb
 C:\GitHubProjects\JARVIS4\bin\Debug\Newtonsoft.Json.dll
 C:\GitHubProjects\JARVIS4\bin\Debug\Newtonsoft.Json.xml
+C:\GitHubProjects\JARVIS4\obj\Debug\JARVIS4.csproj.ResolveComReference.cache

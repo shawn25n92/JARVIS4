@@ -88,6 +88,7 @@ namespace JARVIS4
                 //Start Excel and get Application object.
                 oXL = new Microsoft.Office.Interop.Excel.Application();
                 oXL.Visible = false;
+                oXL.AutomationSecurity = Microsoft.Office.Core.MsoAutomationSecurity.msoAutomationSecurityForceDisable;
 
                 //Get a new workbook.
                 oWB = (Microsoft.Office.Interop.Excel._Workbook)(oXL.Workbooks.Add(""));
@@ -100,7 +101,7 @@ namespace JARVIS4
                 oSheet.Cells[1, 4] = "Salary";
 
                 //Format A1:D1 as bold, vertical alignment = center.
-                oSheet.get_Range("A1", "D1").Font.Bold = true;
+                /*oSheet.get_Range("A1", "D1").Font.Bold = true;
                 oSheet.get_Range("A1", "D1").VerticalAlignment =
                     Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
 
@@ -127,11 +128,12 @@ namespace JARVIS4
 
                 //AutoFit columns A:D.
                 oRng = oSheet.get_Range("A1", "D1");
-                oRng.EntireColumn.AutoFit();
+                oRng.EntireColumn.AutoFit();*/
 
                 oXL.Visible = false;
                 oXL.UserControl = false;
-                oWB.SaveAs("c:\\test\\test505.xls", Microsoft.Office.Interop.Excel.XlFileFormat.xlWorkbookDefault, Type.Missing, Type.Missing,
+                Directory.CreateDirectory(FileDirectory);
+                oWB.SaveAs(String.Format(@"{0}\{1}.xlsx",FileDirectory,"hello"), Microsoft.Office.Interop.Excel.XlFileFormat.xlWorkbookDefault, Type.Missing, Type.Missing,
                     false, false, Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlNoChange,
                     Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
 
