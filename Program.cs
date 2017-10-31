@@ -109,14 +109,22 @@ namespace JARVIS4
                         }
                         else if(primary_command == "getfuseboxfuseaction")
                         {
-                            StatusObject SO_GetFuseboxFuseaction = JARVISCustomAlgorithms.GetFuseboxFuseactionList();
-                            if(SO_GetFuseboxFuseaction.Status != StatusObject.StatusCode.FAILURE)
+                            string claims_path = user_input.Replace("getfuseboxfuseaction", "").Trim();
+                            if(claims_path != null)
                             {
+                                StatusObject SO_GetFuseboxFuseaction = JARVISCustomAlgorithms.GetFuseboxFuseactionList(claims_path);
+                                if (SO_GetFuseboxFuseaction.Status != StatusObject.StatusCode.FAILURE)
+                                {
 
+                                }
+                                else
+                                {
+                                    Console.WriteLine(SO_GetFuseboxFuseaction.ErrorStacktrace);
+                                }
                             }
                             else
                             {
-                                Console.WriteLine(SO_GetFuseboxFuseaction.ErrorStacktrace);
+                                Console.WriteLine("Invalid path");
                             }
                         }
                         else if (primary_command == "customalgo")
@@ -143,9 +151,6 @@ namespace JARVIS4
                                 string type_name = command_parameters[1];
                                 string function_name = command_parameters.ElementAtOrDefault(2);
                                 string function_parameters = command_parameters.ElementAtOrDefault(3);
-                                //JARVISDiagnostics.run_JARVIS_function(type_name, function_name, function_parameters);
-                                //object[] arguments = JARVISDiagnostics.string_to_parameter_list(type_name, function_name, function_parameters);
-                                //JARVISDiagnostics.run_JARVIS_function(type_name, function_name, arguments);
                                 JARVISDiagnostics.RunJARVISMethod("JARVIS4", type_name, function_name, function_parameters);
                             }
                             else

@@ -215,46 +215,125 @@ namespace JARVIS4
             return ruleset;
         }
 
-        public static StatusObject GetFuseboxFuseactionList()
+        public static StatusObject GetFuseboxFuseactionList(string ClaimsPath)
         {
             StatusObject SO = new StatusObject();
             try
             {
+                Directory.CreateDirectory(@"C:\JARVIS4\CustomAlgorithmOutputs\FuseboxFuseaction");
                 // Get the claims development folder
-                StreamReader claims_index = new StreamReader(@"C:\MERIMEN\claims\index.cfm");
+                StreamReader claims_index = new StreamReader(String.Format(@"{0}\index.cfm", ClaimsPath));
                 Dictionary<string, Dictionary<string, int>> fusebox_fuseaction_dictionary = new Dictionary<string, Dictionary<string, int>>();
+                File.Create(String.Format(@"C:\JARVIS4\CustomAlgorithmOutputs\FuseboxFuseaction\ValidFuseboxFuseaction.txt")).Close();
                 string line;
                 List<string> code_list = new List<string>();
+                List<string> filtered_code_list = new List<string>();
                 while((line = claims_index.ReadLine())!= null)
                 {
                     code_list.Add(line);
                 }
+                // For MTRRoot/AppRoot, it will re-invoke claims/index.cfc to redirect to the proper pages. may have to take that into account as well.
+                bool navigate_fuseaction = false;
                 for(int i = 0; i < code_list.Count; i++)
                 {
                     string fusebox = code_list[i].ToLower();
-                    if (fusebox.Contains("cfcase") && !fusebox.Contains("/cfcase"))
+                    if (fusebox.Contains("mtrroot,approot"))
                     {
-                        Console.WriteLine(fusebox.Replace("<!---", "").Replace("--->", "").Replace("<", "").Replace("cfcase value=\"", "").Replace("\">", "").Trim());
+                        navigate_fuseaction = true;
+                    }
+                    if (fusebox.Contains("<cfcase"))
+                    {
+                        string filtered_fusebox = fusebox.Replace("<!---", "").Replace("--->", "").Replace("<", "").Replace("cfcase value=\"", "").Replace("\">", "").Trim();
+                        filtered_code_list.Add(filtered_fusebox);
+                        if (navigate_fuseaction)
+                        {
+                            Console.WriteLine("\t{0}", filtered_fusebox);
+                        }
+                        else
+                        {
+                            Console.WriteLine(filtered_fusebox);
+                        }
                         int current_line = i;
                         for(current_line = i; current_line < code_list.Count; current_line++)
                         {
-                            if (code_list[current_line].Contains("cfinclude"))
+                            string target;
+                            string indentation;
+                            string target_fuseaction = "";
+                            if (navigate_fuseaction)
                             {
-                                Console.WriteLine(code_list[current_line]);
+                                target = "cfinvoke";
+                                indentation = "\t\t";
+                            }
+                            else
+                            {
+                                target = "cfinclude";
+                                indentation = "\t";
+                            }
+                            if (code_list[current_line].Contains(target))
+                            {
+                                if(target == "cfinclude")
+                                {
+                                    // Navigate to that specific index and do the checking for fuseactions
+                                    string current_cfinclude = code_list[current_line].ToLower();
+                                    string filtered_cfinclude = current_cfinclude.Replace("/", "\\").Replace("<cfinclude template=\"", "").Replace("\">", "").Trim();
+                                    Console.WriteLine("{0}{1}", indentation, filtered_cfinclude);
+                                    try
+                                    {
+                                        StreamReader target_index = new StreamReader(String.Format(@"{0}\{1}", ClaimsPath, filtered_cfinclude));
+                                        File.Create(String.Format(String.Format(@"C:\JARVIS4\CustomAlgorithmOutputs\FuseboxFuseaction\{0}.txt", filtered_fusebox))).Close();
+                                        StreamWriter output = new StreamWriter(String.Format(@"C:\JARVIS4\CustomAlgorithmOutputs\FuseboxFuseaction\{0}.txt", filtered_fusebox), append: true);
+                                        StreamWriter valid_fusebox_fuseaction = new StreamWriter(@"C:\JARVIS4\CustomAlgorithmOutputs\FuseboxFuseaction\ValidFuseboxFuseaction.txt", append: true);
+                                        string fuseaction_line;
+                                        while((fuseaction_line = target_index.ReadLine()) != null)
+                                        {
+                                            if (fuseaction_line.Contains("<cfcase"))
+                                            {
+                                                string filtered_fuseaction_line = fuseaction_line.ToLower();
+                                                string cleansed_fuseaction_line = filtered_fuseaction_line.Replace("<", "").Replace("cfcase", "").Replace("\"", "").Replace("value=", "").Replace(">", "").Replace("!", "").Replace("-", "").Replace("\t", "").Trim();
+                                                output.WriteLine(cleansed_fuseaction_line);
+                                                valid_fusebox_fuseaction.WriteLine("fusebox={0}&fuseaction={1}", filtered_fusebox, cleansed_fuseaction_line);
+                                            }
+                                        }
+                                        //output.Write(target_index.ReadToEnd());
+                                        valid_fusebox_fuseaction.Close();
+                                        output.Close();
+                                        target_index.Close();
+                                    }
+                                    catch(Exception ex)
+                                    {
+                                        Console.WriteLine(ex.ToString());
+                                        continue;
+                                    }
+                                }
+                                else
+                                {
+                                    Console.WriteLine("{0}{1}", indentation, code_list[current_line].Trim());
+                                }
                                 break;
                             }
                         }
                     }
-
-                    if (fusebox.Contains("mtrroot,approot"))
-                    {
-
-                    }
                 }
+                Console.WriteLine(filtered_code_list.Count);
+                claims_index.Close();
             }
             catch(Exception e)
             {
                 SO = new StatusObject(e.Message, "GetFuseboxFuseactionList", StatusObject.StatusCode.FAILURE, e.ToString());
+            }
+            return SO;
+        }
+
+        public static StatusObject GetCFStoredProcCalls(string DevelopmentFolderPath)
+        {
+            StatusObject SO = new StatusObject();
+            try
+            {
+                
+            }
+            catch(Exception e)
+            {
+
             }
             return SO;
         }
